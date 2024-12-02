@@ -5,17 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clash of Telegram</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script> <!-- Telegram SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
     <h1>Clash of Telegram</h1>
     <div class="resources">
-        <p>Ресурсы: <span id="resource-count">0</span></p>
+        <p>Ресурсы: <span id="resource-count">2500</span></p>
     </div>
-    <div id="game-container">
-        <div id="buildings"></div>
-        <button id="add-building">Построить здание</button>
+    <button id="open-menu">Меню постройки</button>
+    <div id="building-menu" class="hidden">
+        <h2>Выберите здание</h2>
+        <button class="building-option" data-building="gold-mine">Шахта золота (500 монет)</button>
+        <button class="building-option" data-building="oil-rig">Нефтедобытчик (1000 монет)</button>
+        <button class="building-option" data-building="town-hall">Ратуша (1500 монет)</button>
+        <button class="building-option" data-building="barracks">Казарма (2000 монет)</button>
+        <button class="building-option" data-building="builder-house">Дом строителей (2500 монет)</button>
     </div>
-    <script src="script.js"></script> <!-- Ваш JavaScript-файл -->
+    <div id="game-field"></div>
+    <script src="script.js"></script>
 </body>
 </html>
