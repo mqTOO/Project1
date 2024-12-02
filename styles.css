@@ -7,26 +7,82 @@ body {
     align-items: center;
     background-color: #f4f4f4;
 }
-#game-container {
-    margin-top: 20px;
-    width: 80%;
-    max-width: 600px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 10px;
-    background: #fff;
+
+h1 {
+    margin: 20px 0;
 }
-.building {
-    margin: 10px;
-    padding: 10px;
-    border: 1px solid #000;
-    border-radius: 5px;
-    text-align: center;
-}
+
 .resources {
     margin-bottom: 20px;
 }
+
+#game-field {
+    display: grid;
+    gap: 10px;
+    background-color: #e0e0e0;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.cell {
+    width: 60px;
+    height: 60px;
+    background-color: #fff;
+    border: 1px dashed #bbb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.building {
+    width: 70%;
+    height: 70%;
+    background-color: #ffa726;
+    border: 2px solid #f57c00;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 12px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
 button {
-    padding: 5px 10px;
-    margin-top: 10px;
+    padding: 10px;
+    font-size: 14px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #f0f0f0;
+}
+
+.hidden {
+    display: none;
+}
+
+#building-menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff;
+    text-align: center;
+    z-index: 10; /* Убедимся, что меню будет поверх игрового поля */
+}
+
+.building-option {
+    width: 200px;
+    margin: 10px 0;
 }
