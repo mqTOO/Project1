@@ -22,10 +22,20 @@ const gameField = document.getElementById("game-field");
 const openMenuButton = document.getElementById("open-menu");
 const buildingMenu = document.getElementById("building-menu");
 
-let resources = 2500;
+let resources = 2500; // Стартовый баланс
 let buildings = [];
 let cells = [];
 const gridSize = 8;
+
+// Автоматическая адаптация игрового поля под экран пользователя
+function adjustGameField() {
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    const gameSize = Math.min(screenWidth * 0.9, screenHeight * 0.7);
+    gameField.style.width = `${gameSize}px`;
+    gameField.style.height = `${gameSize}px`;
+}
 
 // Создание игрового поля
 function createGameField() {
@@ -40,7 +50,7 @@ function createGameField() {
     gameField.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
 }
 
-// Обновление ресурсов
+// Обновление отображения ресурсов
 function updateResources() {
     resourceCount.textContent = resources;
 }
@@ -48,7 +58,7 @@ function updateResources() {
 // Генерация ресурсов
 function generateResources() {
     buildings.forEach((building) => {
-        resources += building.level; // Увеличиваем ресурсы в зависимости от уровня здания
+        resources += building.level; // Увеличиваем ресурсы по уровню зданий
     });
     updateResources();
 }
@@ -119,6 +129,18 @@ buildingOptions.forEach((option) => {
     });
 });
 
+// Перемещение зданий (дополнительно, если понадобится)
+gameField.addEventListener("click", (event) => {
+    const targetCell = event.target.closest(".cell");
+    if (!targetCell) return;
+
+    // Реализация перемещения здания, если потребуется.
+});
+
+// Обработка изменения размеров окна
+adjustGameField();
+window.addEventListener("resize", adjustGameField);
+
 // Запуск игры
 createGameField();
-setInterval(generateResources, 5000);
+setInterval(generateResources, 5000); // Генерация ресурсов каждые 5 секунд
