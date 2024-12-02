@@ -1,3 +1,4 @@
+/* Общие стили */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -5,18 +6,21 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-color: #f4f4f4;
-    overflow-x: hidden;
+    overflow: hidden; /* Запрещаем прокрутку */
+    height: 100vh;
+    width: 100vw;
 }
 
 h1 {
-    margin: 20px 0;
+    margin: 10px 0;
     font-size: 1.5rem;
     text-align: center;
 }
 
 .resources {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-size: 1rem;
 }
 
@@ -29,20 +33,26 @@ h1 {
     padding: 10px;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    max-width: 360px;
+    width: 90vw; /* Установить ширину относительно экрана */
+    height: 70vw; /* Пропорциональная высота */
+    max-width: 600px; /* Ограничение максимальной ширины */
+    max-height: 600px; /* Ограничение максимальной высоты */
     position: relative;
 }
 
 .cell {
-    width: 50px;
-    height: 50px;
     background-color: #fff;
     border: 1px dashed #bbb;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+}
+
+.cell {
+    width: 100%; /* Автоматическая ширина */
+    height: 100%;
+    aspect-ratio: 1 / 1; /* Квадратная форма */
 }
 
 .building {
@@ -61,7 +71,7 @@ h1 {
 }
 
 button {
-    padding: 8px;
+    padding: 10px;
     font-size: 1rem;
     margin: 5px;
     cursor: pointer;
