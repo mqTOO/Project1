@@ -50,6 +50,29 @@ function createGameField() {
     gameField.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
 }
 
+// Добавление ратуши в центр поля
+function placeTownHall() {
+    const centerIndex = Math.floor((gridSize * gridSize) / 2); // Индекс центральной ячейки
+    const centerCell = cells[centerIndex];
+
+    const townHall = document.createElement("div");
+    townHall.classList.add("building");
+    townHall.textContent = "РАТУША";
+
+    centerCell.appendChild(townHall);
+
+    buildings.push({
+        id: buildings.length + 1,
+        type: "town-hall",
+        level: 1,
+        cellId: centerCell.dataset.id,
+        element: townHall
+    });
+
+    resources -= 500; // Уменьшаем начальный баланс на стоимость ратуши
+    updateResources();
+}
+
 // Обновление отображения ресурсов
 function updateResources() {
     resourceCount.textContent = resources;
@@ -82,9 +105,6 @@ buildingOptions.forEach((option) => {
                 break;
             case "oil-rig":
                 buildingCost = 1000;
-                break;
-            case "town-hall":
-                buildingCost = 1500;
                 break;
             case "barracks":
                 buildingCost = 2000;
@@ -129,18 +149,11 @@ buildingOptions.forEach((option) => {
     });
 });
 
-// Перемещение зданий (дополнительно, если понадобится)
-gameField.addEventListener("click", (event) => {
-    const targetCell = event.target.closest(".cell");
-    if (!targetCell) return;
-
-    // Реализация перемещения здания, если потребуется.
-});
-
 // Обработка изменения размеров окна
 adjustGameField();
 window.addEventListener("resize", adjustGameField);
 
 // Запуск игры
 createGameField();
+placeTownHall(); // Устанавливаем ратушу в центр
 setInterval(generateResources, 5000); // Генерация ресурсов каждые 5 секунд
