@@ -35,7 +35,10 @@ function adjustGameField() {
     const screenWidth = window.innerWidth;
     const screenHeight = window.innerHeight;
 
-    const gameSize = Math.min(screenWidth * 0.9, screenHeight * 0.7);
+    const gameWidth = screenWidth * 0.7; // Используем 70% ширины
+    const gameHeight = screenHeight * 0.9; // Используем 90% высоты
+
+    const gameSize = Math.min(gameWidth, gameHeight); // Сохраняем квадратную форму
     gameField.style.width = `${gameSize}px`;
     gameField.style.height = `${gameSize}px`;
 }
@@ -55,7 +58,7 @@ function createGameField() {
 
 // Добавление ратуши в центр поля
 function placeTownHall() {
-    const centerIndex = Math.floor((gridSize * gridSize) / 2); // Индекс центральной ячейки
+    const centerIndex = Math.floor((gridSize * gridSize) / 2);
     const centerCell = cells[centerIndex];
 
     const townHall = document.createElement("div");
@@ -69,10 +72,10 @@ function placeTownHall() {
         type: "town-hall",
         level: 1,
         cellId: centerCell.dataset.id,
-        element: townHall
+        element: townHall,
     });
 
-    resources -= 500; // Уменьшаем начальный баланс на стоимость ратуши
+    resources -= 500;
     updateResources();
 }
 
@@ -84,7 +87,7 @@ function updateResources() {
 // Генерация ресурсов
 function generateResources() {
     buildings.forEach((building) => {
-        resources += building.level; // Увеличиваем ресурсы по уровню зданий
+        resources += building.level;
     });
     updateResources();
 }
@@ -95,22 +98,10 @@ openMenuButton.addEventListener("click", () => {
     buildingMenu.classList.remove("hidden");
 });
 
-// Закрытие меню по кнопке крестик
+// Закрытие меню
 closeMenuButton.addEventListener("click", () => {
     buildingMenu.classList.add("hidden");
     buildingMenu.classList.remove("visible");
-});
-
-// Закрытие меню при нажатии на пустую область
-document.addEventListener("click", (event) => {
-    if (
-        buildingMenu.classList.contains("visible") &&
-        !buildingMenu.contains(event.target) &&
-        !openMenuButton.contains(event.target)
-    ) {
-        buildingMenu.classList.add("hidden");
-        buildingMenu.classList.remove("visible");
-    }
 });
 
 // Построить здание
@@ -120,7 +111,6 @@ buildingOptions.forEach((option) => {
         const buildingType = option.dataset.building;
         let buildingCost = 0;
 
-        // Стоимость здания
         switch (buildingType) {
             case "gold-mine":
                 buildingCost = 500;
@@ -144,13 +134,12 @@ buildingOptions.forEach((option) => {
             return;
         }
 
-        const emptyCell = cells.find(cell => !cell.hasChildNodes());
+        const emptyCell = cells.find((cell) => !cell.hasChildNodes());
         if (!emptyCell) {
-            alert("Нет свободного места для постройки здания!");
+            alert("Нет свободного места для постройки!");
             return;
         }
 
-        // Создание элемента здания
         const buildingElement = document.createElement("div");
         buildingElement.classList.add("building");
         buildingElement.textContent = buildingType.replace("-", " ").toUpperCase();
@@ -162,7 +151,7 @@ buildingOptions.forEach((option) => {
             type: buildingType,
             level: 1,
             cellId: emptyCell.dataset.id,
-            element: buildingElement
+            element: buildingElement,
         });
 
         resources -= buildingCost;
@@ -172,19 +161,8 @@ buildingOptions.forEach((option) => {
     });
 });
 
-// Перемещение зданий (дополнительно, если потребуется)
-gameField.addEventListener("click", (event) => {
-    const targetCell = event.target.closest(".cell");
-    if (!targetCell) return;
-
-    // Реализация перемещения здания, если потребуется.
-});
-
-// Обработка изменения размеров окна
 adjustGameField();
 window.addEventListener("resize", adjustGameField);
-
-// Запуск игры
 createGameField();
-placeTownHall(); // Устанавливаем ратушу в центр
-setInterval(generateResources, 5000); // Генерация ресурсов каждые 5 секунд
+placeTownHall();
+setInterval(generateResources, 5000);
