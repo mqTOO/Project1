@@ -1,3 +1,23 @@
+// Подключение к Telegram Web App
+const tg = window.Telegram.WebApp;
+
+// Инициализация Telegram Mini-App
+tg.ready();
+tg.expand();
+
+tg.disableVerticalSwipes();
+
+// Получение информации о пользователе
+const user = tg.initDataUnsafe?.user || null;
+
+if (user) {
+    alert(`Привет, ${user.first_name}! Добро пожаловать в игру.`);
+}
+
+// Telegram Back Button
+tg.BackButton.show();
+tg.BackButton.onClick(() => tg.close());
+
 const gameField = document.getElementById("game-field");
 const openMenuButton = document.getElementById("open-menu");
 const buildingMenu = document.getElementById("building-menu");
