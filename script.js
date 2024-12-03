@@ -1,5 +1,5 @@
 // Подключение к Telegram Web App
-const tg = window.Telegram.WebApp;
+const tg = window.Telegram.WebApp.isVerticalSwipesEnabled = false;
 
 // Инициализация Telegram Mini-App
 tg.ready();
