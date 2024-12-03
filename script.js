@@ -5,6 +5,7 @@ const tg = window.Telegram.WebApp;
 tg.ready();
 tg.expand();
 tg.requestFullscreen();
+tg.disableVerticalSwipes();
 
 // Получение информации о пользователе
 const user = tg.initDataUnsafe?.user || null;
