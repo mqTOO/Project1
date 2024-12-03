@@ -4,7 +4,7 @@ const tg = window.Telegram.WebApp;
 // Инициализация Telegram Mini-App
 tg.ready();
 tg.expand();
-tg.requestFullscreen();
+tg.requestFullScreen();
 tg.disableVerticalSwipes();
 
 // Получение информации о пользователе
@@ -89,26 +89,44 @@ buildingOptions.forEach(option => {
     });
 });
 
-// Перемещение камеры (свайп)
-gameField.addEventListener("mousedown", (e) => {
+// Перемещение камеры (свайп + мышь)
+function startDrag(x, y) {
     isDragging = true;
-    startX = e.clientX;
-    startY = e.clientY;
-});
+    startX = x;
+    startY = y;
+}
 
-document.addEventListener("mouseup", () => {
-    isDragging = false;
-});
-
-document.addEventListener("mousemove", (e) => {
+function drag(x, y) {
     if (!isDragging) return;
-    offsetX += e.clientX - startX;
-    offsetY += e.clientY - startY;
-    startX = e.clientX;
-    startY = e.clientY;
+    offsetX += x - startX;
+    offsetY += y - startY;
+    startX = x;
+    startY = y;
     gameField.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+}
+
+function endDrag() {
+    isDragging = false;
+}
+
+// Обработка событий мыши
+gameField.addEventListener("mousedown", (e) => startDrag(e.clientX, e.clientY));
+document.addEventListener("mousemove", (e) => drag(e.clientX, e.clientY));
+document.addEventListener("mouseup", endDrag);
+
+// Обработка событий касания (для мобильных устройств)
+gameField.addEventListener("touchstart", (e) => {
+    const touch = e.touches[0];
+    startDrag(touch.clientX, touch.clientY);
 });
+
+gameField.addEventListener("touchmove", (e) => {
+    const touch = e.touches[0];
+    drag(touch.clientX, touch.clientY);
+    e.preventDefault(); // Предотвращает стандартное поведение, такое как прокрутка страницы
+});
+
+gameField.addEventListener("touchend", endDrag);
 
 // Инициализация игры
-createGameField();
 createGameField();
