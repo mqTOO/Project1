@@ -4,6 +4,7 @@ const tg = window.Telegram.WebApp;
 // Инициализация Telegram Mini-App
 tg.ready();
 tg.expand();
+tg.requestFullscreen();
 
 // Получение информации о пользователе
 const user = tg.initDataUnsafe?.user || null;
