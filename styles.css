@@ -4,9 +4,9 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Горизонтальная ориентация */
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     background-color: #f4f4f4;
     overflow: hidden; /* Запрещаем прокрутку */
     height: 100vh;
@@ -33,8 +33,8 @@ h1 {
     padding: 10px;
     justify-content: center;
     align-items: center;
-    width: 90vw; /* Установить ширину относительно экрана */
-    height: 70vw; /* Пропорциональная высота */
+    height: 90vh; /* Основное игровое пространство */
+    width: 70vw; /* Пропорциональная ширина */
     max-width: 600px; /* Ограничение максимальной ширины */
     max-height: 600px; /* Ограничение максимальной высоты */
     position: relative;
@@ -47,11 +47,6 @@ h1 {
     justify-content: center;
     align-items: center;
     position: relative;
-}
-
-.cell {
-    width: 100%; /* Автоматическая ширина */
-    height: 100%;
     aspect-ratio: 1 / 1; /* Квадратная форма */
 }
 
@@ -108,7 +103,7 @@ button:hover {
     margin: 10px 0;
     font-size: 0.9rem;
 }
-/* Кнопка закрытия */
+
 .close-button {
     position: absolute;
     top: 10px;
@@ -123,24 +118,6 @@ button:hover {
 
 .close-button:hover {
     color: #f57c00;
-}
-
-/* Анимация открытия и закрытия меню */
-#building-menu {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    background-color: rgba(0, 0, 0, 0.9);
-    padding: 20px;
-    border-radius: 10px;
-    color: #fff;
-    text-align: center;
-    z-index: 10;
-    width: 90%;
-    max-width: 300px;
-    opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 #building-menu.visible {
