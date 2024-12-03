@@ -4,7 +4,7 @@ const tg = window.Telegram.WebApp;
 // Инициализация Telegram Mini-App
 tg.ready();
 tg.expand();
-
+tg.requestFullScreen();
 tg.disableVerticalSwipes();
 
 // Получение информации о пользователе
